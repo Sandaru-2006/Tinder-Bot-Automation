@@ -29,7 +29,7 @@ WebDriverWait(search_engine, 10).until(
     EC.element_to_be_clickable((By.CSS_SELECTOR, '.nsm7Bb-HzV7m-LgbsSe-bN97Pc-sM5MNb '))
 ).click()
 
-# Handle Google login if it opens in a new window
+# Handle Google login if it opens in a new windowo
 time.sleep(3)
 base_window = search_engine.window_handles[0]
 google_login_window = search_engine.window_handles[1]
@@ -60,12 +60,16 @@ try:
     ).click()
 except Exception as e:
     print("Location permissions not found or already handled.")
+try:
+    time.sleep(5)
+    WebDriverWait(search_engine, 10).until(
+        EC.element_to_be_clickable(
+            (By.XPATH, '/html/body/div[1]/div/div[1]/div/main/div[1]/div/div/div/div[2]/button'))).click()
+    time.sleep(5)
 
-time.sleep(5)
-WebDriverWait(search_engine, 10).until(
-    EC.element_to_be_clickable(
-        (By.XPATH, '/html/body/div[1]/div/div[1]/div/main/div[1]/div/div/div/div[2]/button'))).click()
-time.sleep(5)
+except Exception:
+    print("hide button not found")
+
 like_proceed = True
 
 try:
@@ -94,5 +98,5 @@ try:
                     tinderplus_popup.click()
                     print("No add_to_home_screen button found")
 except Exception:
-    print("You've reached the maximum amount of likes for the day!!")
+    print("You've reached the maximum amount of likes for the day!! Try again in 12hrs")
     search_engine.quit()
